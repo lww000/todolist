@@ -4,13 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <Button
-        android:gravity="center_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bt2"
-        android:text="delete"/>
-
     <TextView
         android:id="@+id/plan_fruit_name"
         android:layout_width="match_parent"
@@ -21,5 +14,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Type your plan"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置闹钟（一次）"
+        android:layout_weight="1"
+        android:onClick="setAlarmOne"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addData"
+        android:text="保存"
+        android:layout_weight="1"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/queryData"
+        android:text="addData"
+        android:layout_weight="1"/>
 
 </LinearLayout>

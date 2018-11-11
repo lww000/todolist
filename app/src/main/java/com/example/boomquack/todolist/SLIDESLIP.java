@@ -3,8 +3,10 @@ package com.example.boomquack.todolist;
 import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 
 public class SLIDESLIP extends ItemTouchHelper.Callback{
+    private static final String TAG = "SLIDESLIP";
 
     private Plan_FruitAdapter mAdapter;
     public SLIDESLIP(Plan_FruitAdapter mAdapter){
@@ -16,11 +18,12 @@ public class SLIDESLIP extends ItemTouchHelper.Callback{
         int dragFlags=ItemTouchHelper.UP|ItemTouchHelper.DOWN;
         int swipeFlags=ItemTouchHelper.LEFT;
         return makeMovementFlags(dragFlags,swipeFlags);
+
     }
 
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-       mAdapter.onItemMove(viewHolder.getAdapterPosition(),target.getAdapterPosition());
+        mAdapter.onItemMove(viewHolder.getAdapterPosition(),target.getAdapterPosition());
         return true;
     }
 
