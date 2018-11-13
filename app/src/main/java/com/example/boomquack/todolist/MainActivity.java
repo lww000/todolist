@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -23,8 +24,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    private PendingIntent pendingIntent;
-    private AlarmManager alarmManager;
+
     private List<String> planfruitlist = new ArrayList<>();
     private LinearLayoutManager layoutmanager;
     private RecyclerView recyclerView;
@@ -41,14 +41,23 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
         layoutmanager=new LinearLayoutManager(this);
-        plan_fruitAdapter=new Plan_FruitAdapter(planfruitlist);
+        plan_fruitAdapter=new Plan_FruitAdapter(MainActivity.this,planfruitlist);
         ItemTouchHelper.Callback callback=new SLIDESLIP(plan_fruitAdapter);
         ItemTouchHelper  touchHelper=new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(recyclerView);
 
         recyclerView.setLayoutManager(layoutmanager);
         recyclerView.setAdapter(plan_fruitAdapter);
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        touchHelper.attachToRecyclerView(recyclerView);
+//        recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent=new Intent(MainActivity.this,Main2Activity.class);
+//                startActivity(intent);
+//            }
+//        });
+
+
 
 
         final Plan_FruitAdapter finalPlan_fruitAdapter = plan_fruitAdapter;
@@ -77,50 +86,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        bt4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                      String inputText = edit.getText().toString();
-//                      Plan_Fruit plan_fruit = new Plan_Fruit();
-//                      plan_fruit.setPlan(inputText);
-//                      plan_fruit.save();
-//            }
-//        });
+
     }
 
-    //设置一次闹钟
-    public void setAlarmOne(View view) {
-        //获取当前系统时间
-        Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-        //弹出对话框
-        TimePickerDialog timePickerDialog = new TimePickerDialog
-                (this, new TimePickerDialog.OnTimeSetListener()
-                {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute)
-                    {
-                        Calendar calendar1=Calendar.getInstance();
-                        calendar1.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                        calendar1.set(Calendar.MINUTE,minute);
-                        Log.i("test","调了1");
-                        Intent intent=new Intent("AlarmClock");
-                        pendingIntent=PendingIntent.getBroadcast(MainActivity.this,0,intent,0);
-                        alarmManager.set(AlarmManager.RTC_WAKEUP,calendar1.getTimeInMillis(),pendingIntent);
-                        Log.i("test","调了2");
-                    }
-                }, hour, minute, true);
-        timePickerDialog.show();
-        Log.d(TAG, "setAlarmOne: ");
-    }
 
-    //取消
-    public void cancelAlarmCycle(View view) {
-        alarmManager.cancel(pendingIntent);
-        Log.d(TAG, "cancelAlarmCycle: ");
-    }
 
     public void initView()
     {   bt1=(Button)findViewById(R.id.bt1);

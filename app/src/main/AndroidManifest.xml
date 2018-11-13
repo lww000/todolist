@@ -15,20 +15,30 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <activity android:name=".Ring">
-
         </activity>
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <activity android:name=".Ring"></activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <receiver android:name=".Ringrescevied">
             <intent-filter>
-                <action android:name="AlarmClock"></action>
+                <action android:name="AlarmClock" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".Main2Activity">
+            <intent-filter>
+                <action android:name="com.example.boomquack.todolist.ACTION_START"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.example.boomquack.todolist.MY_CATEGORY"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

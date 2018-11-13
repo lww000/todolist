@@ -1,10 +1,14 @@
 package com.example.boomquack.todolist;
 
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,30 +24,29 @@ import java.util.List;
 
 public class Plan_FruitAdapter extends RecyclerView.Adapter<Plan_FruitAdapter.ViewHolder> {
     private List<String> mplan_fruitlist;
+    private Context  context;
     private static final String TAG = "Plan_FruitAdapter";
 
 
     static class ViewHolder extends RecyclerView.ViewHolder
     {
-        View planfruitview;
         TextView plan_fruitname;
-        Button addData;
-        EditText edit;
+        View planview;
 
         public ViewHolder(View view)
         {
             super(view);
+            planview=view;
             plan_fruitname = (TextView) view.findViewById(R.id.plan_fruit_name);
-            addData =(Button)view.findViewById(R.id.addData);
-            edit=(EditText)view.findViewById(R.id.et);
         }
     }
 
 
 
-    public Plan_FruitAdapter(List<String> PlanFruitList)
+    public Plan_FruitAdapter(Context context,List<String> PlanFruitList)
     {
         mplan_fruitlist = PlanFruitList;
+        this.context=context;
     }
 
 
@@ -60,14 +63,11 @@ public class Plan_FruitAdapter extends RecyclerView.Adapter<Plan_FruitAdapter.Vi
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plan_fruit_item, parent, false);
         final ViewHolder holder = new ViewHolder(view);
-        holder.addData.setOnClickListener(new View.OnClickListener() {
+        holder.planview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String inputText;
-                inputText = holder.edit.getText().toString();
-                Plan_Fruit plan_fruit = new Plan_Fruit();
-                      plan_fruit.setPlan(inputText);
-                      plan_fruit.save();
+                Intent intent=new Intent(context,Main2Activity.class);
+                context.startActivity(intent);
             }
         });
         return holder;
