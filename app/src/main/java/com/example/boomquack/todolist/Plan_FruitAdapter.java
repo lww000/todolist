@@ -23,36 +23,36 @@ import java.util.List;
  */
 
 public class Plan_FruitAdapter extends RecyclerView.Adapter<Plan_FruitAdapter.ViewHolder> {
-    private List<String> mplan_fruitlist;
+    private  List<PlanItem> mplanItemList;
+   // private List<String> mplan_fruitlist;
     private Context  context;
     private static final String TAG = "Plan_FruitAdapter";
+
+    public Plan_FruitAdapter(Context context,List<PlanItem> PlanFruitList)
+    {
+        mplanItemList = PlanFruitList;
+        this.context=context;
+    }
 
 
     static class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView plan_fruitname;
+        TextView plantitle;
         View planview;
 
         public ViewHolder(View view)
         {
             super(view);
             planview=view;
-            plan_fruitname = (TextView) view.findViewById(R.id.plan_fruit_name);
+            plantitle = (TextView) view.findViewById(R.id.plan_fruit_name);
         }
     }
 
 
-
-    public Plan_FruitAdapter(Context context,List<String> PlanFruitList)
+    public void addItem(int position, List<PlanItem> planfruitlist)
     {
-        mplan_fruitlist = PlanFruitList;
-        this.context=context;
-    }
-
-
-    public void addItem(int position, List<String> planfruitlist)
-    {
-        planfruitlist.add(position,"今天的小目标！！");
+        PlanItem plan1=new PlanItem();
+        planfruitlist.add(position,plan1);
         notifyItemInserted(position);
         Log.d(TAG, "addItem: ");
     }
@@ -76,26 +76,26 @@ public class Plan_FruitAdapter extends RecyclerView.Adapter<Plan_FruitAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder,int position)
     {
-        String plan_fruit=mplan_fruitlist.get(position);
-        holder.plan_fruitname.setText(mplan_fruitlist.get(position));
+        PlanItem planitem=mplanItemList.get(position);
+        holder.plantitle.setText(planitem.getContent());
     }
 
     @Override
     public int getItemCount(){
-        return mplan_fruitlist.size();
+        return mplanItemList.size();
     }
 
 
     public void onItemMove(int fromPosition,int toPosition)
     {
-        Collections.swap(mplan_fruitlist,fromPosition,toPosition);
+        Collections.swap(mplanItemList,fromPosition,toPosition);
         notifyItemMoved(fromPosition,toPosition);
         Log.d(TAG, "onItemMove: ");
     }
 
     public void onItemDelete(int position)
     {
-        mplan_fruitlist.remove(position);
+        mplanItemList.remove(position);
         notifyItemRemoved(position);
         Log.d(TAG, "onItemDelete: ");
     }

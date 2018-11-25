@@ -8,6 +8,10 @@
     <TextView
         android:id="@+id/plan_fruit_name"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        android:background="#99ccff"
+        android:drawableStart="@mipmap/item1"
+        android:drawableLeft="@mipmap/item1" />
+
 
 </LinearLayout>

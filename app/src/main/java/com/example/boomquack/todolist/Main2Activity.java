@@ -13,13 +13,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class Main2Activity extends AppCompatActivity {
     private PendingIntent pendingIntent;
     private AlarmManager alarmManager;
+    private EditText editText;
+    private Button addData;
     private static final String TAG = "Main2Activity";
 
 
@@ -27,11 +32,10 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        ActionBar actionBar=getSupportActionBar();
-        if(actionBar!=null){
-            actionBar.hide();
-        }
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        initView1();
+
+
+
     }
 
     //设置一次闹钟
@@ -61,4 +65,13 @@ public class Main2Activity extends AppCompatActivity {
         Log.d(TAG, "setAlarmOne: ");
     }
 
+    public void initView1(){
+        ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null){
+            actionBar.hide();
+        }
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        editText=(EditText)findViewById(R.id.edit);
+
+    }
 }
